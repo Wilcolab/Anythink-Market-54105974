@@ -17,7 +17,7 @@ exports.calculate = function(req, res) {
     'multiply': function(a, b) { return a * b },
     'divide':   function(a, b) { return a / b },
     'power':    function(a, b) { return Math.pow(a, b) },
-    'exp':      function(a, b) { return Math.exp(a) }, // ignores b
+    'exp':      function(a) { return Math.exp(a) },
   };
 
   if (!req.query.operation) {
@@ -31,13 +31,13 @@ exports.calculate = function(req, res) {
   }
 
   if (!req.query.operand1 ||
-      !req.query.operand1.match(/^(-)?[0-9\.]+(e(-)?[0-9]+)?$/) ||
+      !req.query.operand1.match(/^(-)?[0-9.]+(e(-)?[0-9]+)?$/) ||
       req.query.operand1.replace(/[-0-9e]/g, '').length > 1) {
     throw new Error("Invalid operand1: " + req.query.operand1);
   }
 
   if (!req.query.operand2 ||
-      !req.query.operand2.match(/^(-)?[0-9\.]+(e(-)?[0-9]+)?$/) ||
+      !req.query.operand2.match(/^(-)?[0-9.]+(e(-)?[0-9]+)?$/) ||
       req.query.operand2.replace(/[-0-9e]/g, '').length > 1) {
     throw new Error("Invalid operand2: " + req.query.operand2);
   }

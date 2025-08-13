@@ -95,6 +95,118 @@ describe('Arithmetic', function () {
 
 // TODO: Challenge #1
  
+    describe('Subtraction', function () {
+        it('subtracts two positive integers', function (done) {
+            request.get('/arithmetic?operation=subtract&operand1=42&operand2=21')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 21 });
+                    done();
+                });
+        });
+        it('subtracts a larger integer from a smaller integer', function (done) {
+            request.get('/arithmetic?operation=subtract&operand1=21&operand2=42')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: -21 });
+                    done();
+                });
+        });
+        it('subtracts zero from an integer', function (done) {
+            request.get('/arithmetic?operation=subtract&operand1=42&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 42 });
+                    done();
+                });
+        });
+        it('subtracts a negative integer', function (done) {
+            request.get('/arithmetic?operation=subtract&operand1=21&operand2=-21')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 42 });
+                    done();
+                });
+        });
+    });
+
+    describe('Power', function () {
+        it('calculates power of two positive integers', function (done) {
+            request.get('/arithmetic?operation=power&operand1=2&operand2=3')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 8 });
+                    done();
+                });
+        });
+        it('calculates power with base zero', function (done) {
+            request.get('/arithmetic?operation=power&operand1=0&operand2=5')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 0 });
+                    done();
+                });
+        });
+        it('calculates power with exponent zero', function (done) {
+            request.get('/arithmetic?operation=power&operand1=5&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 1 });
+                    done();
+                });
+        });
+        it('calculates power with negative exponent', function (done) {
+            request.get('/arithmetic?operation=power&operand1=2&operand2=-3')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 0.125 });
+                    done();
+                });
+        });
+        it('calculates power with decimal base', function (done) {
+            request.get('/arithmetic?operation=power&operand1=2.5&operand2=2')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 6.25 });
+                    done();
+                });
+        });
+    });
+
+    describe('Exponential', function () {
+        it('calculates exponential of zero', function (done) {
+            request.get('/arithmetic?operation=exp&operand1=0&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 1 });
+                    done();
+                });
+        });
+        it('calculates exponential of one', function (done) {
+            request.get('/arithmetic?operation=exp&operand1=1&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body.result).to.be.closeTo(2.718281828459045, 1e-10);
+                    done();
+                });
+        });
+        it('calculates exponential of negative number', function (done) {
+            request.get('/arithmetic?operation=exp&operand1=-1&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body.result).to.be.closeTo(0.36787944117144233, 1e-10);
+                    done();
+                });
+        });
+        it('calculates exponential of decimal number', function (done) {
+            request.get('/arithmetic?operation=exp&operand1=0.5&operand2=0')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body.result).to.be.closeTo(1.6487212707001282, 1e-10);
+                    done();
+                });
+        });
+    });
 
     describe('Multiplication', function () {
         it('multiplies two positive integers', function (done) {
