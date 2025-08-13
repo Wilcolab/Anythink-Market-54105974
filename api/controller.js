@@ -10,7 +10,7 @@ exports.calculate = function(req, res) {
     res.json({ error: err.message });
   });
 
-  // Add operator
+  // TODO: Add operator
   var operations = {
     'add':      function(a, b) { return Number(a) + Number(b) },
     'subtract': function(a, b) { return a - b },
@@ -44,3 +44,4 @@ exports.calculate = function(req, res) {
 
   res.json({ result: operation(req.query.operand1, req.query.operand2) });
 };
+
