@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose the port on which the server will run
 EXPOSE 8000
 
-# Set the command to run the server
-CMD ["uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+# Set the command to run the Flask server
+CMD ["python", "app.py"]
