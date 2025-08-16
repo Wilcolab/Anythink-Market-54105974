@@ -41,21 +41,8 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start server
-        run: npm run start &
-
-      - name: Wait for server
-        run: npx wait-on http://localhost:8001
-
       - name: Wilco checks
         id: Wilco
         uses: trywilco/actions@main
         with:
           engine: ${{ secrets.WILCO_ENGINE_URL }}
-        env:
-          DB_USER: postgres
-          DB_PASSWORD: postgres
-          DB_NAME: anythink-market
